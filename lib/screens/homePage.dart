@@ -10,12 +10,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Box appbox;
+  String title;
   final TextEditingController idController = TextEditingController();
 
   final TextEditingController nameController = TextEditingController();
   String name = "abc";
   @override
   void initState() {
+    title = widget.title;
     Hive.openBox('settings').then((value) => appbox = value).whenComplete(() {
       getet();
       print(name);
@@ -30,10 +32,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('$title')),
+      drawer: Drawer(),
       body: Column(children: <Widget>[
         Expanded(
           child: Center(
-            child: FlatButton(
+            child: RaisedButton(
               onPressed: () {
                 print(appbox.get("a"));
                 print(appbox.get("b"));
@@ -44,11 +48,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-        Text(name.toString()),
+        //Text(name.toString()),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[            
-            FlatButton(
+            RaisedButton(
               onPressed: () {
                 showDialog(
                   context: context,
@@ -68,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               controller: nameController,
                             ),
                             SizedBox(height: 50),
-                            FlatButton(
+                            RaisedButton(
                               onPressed: () {
                                 final key = idController.text;
                                 final value = nameController.text;
@@ -87,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("Add"),
               color: Colors.greenAccent,
             ),
-            FlatButton(
+            RaisedButton(
               onPressed: () {
                 showDialog(
                   context: context,
@@ -107,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               controller: nameController,
                             ),
                             SizedBox(height: 50),
-                            FlatButton(
+                            RaisedButton(
                               onPressed: () {
                                 final key = idController.text;
                                 final value = nameController.text;
@@ -127,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("update"),
               color: Colors.greenAccent,
             ),
-            FlatButton(
+            RaisedButton(
               onPressed: (){
                 showDialog(
                   context: context,
@@ -143,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               controller: idController,
                             ),
                             SizedBox(height: 50),
-                            FlatButton(
+                            RaisedButton(
                               onPressed: () {
                                 final key = idController.text;
                                 appbox.delete(key);
