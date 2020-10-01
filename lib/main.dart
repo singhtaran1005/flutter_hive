@@ -23,3 +23,28 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class NEWSCREEN extends StatefulWidget {
+  @override
+  _NEWSCREENState createState() => _NEWSCREENState();
+}
+
+class _NEWSCREENState extends State<NEWSCREEN> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('FLUTTER HIVE'),
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.black,
+      body: Container(
+        child: Column(
+          children: [
+            Text('data')
+          ],
+        ),
+      ),
+    );
+  }
+}
