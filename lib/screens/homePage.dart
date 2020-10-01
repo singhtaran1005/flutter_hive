@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import '../main.dart';
+
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+  MyHomePage({this.title});
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -24,16 +26,34 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     super.initState();
   }
+
   getet() {
     setState(() {
-        name = appbox.get("a");
-      });
+      name = appbox.get("a");
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('$title')),
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: ListTile(
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RaisedButton(
+              onPressed: () {
+                Text('Profile',
+                    style: TextStyle(
+                      fontSize: 50,
+                      color: Colors.black45,
+                      fontWeight: FontWeight.w100,
+                    ));
+              },
+            ),
+          ),
+        ),
+      ),
       body: Column(children: <Widget>[
         Expanded(
           child: Center(
@@ -42,6 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 print(appbox.get("a"));
                 print(appbox.get("b"));
                 print(appbox.get("c"));
+                Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => NEWSCREEN()),
+  );
               },
               child: Text("Show"),
               color: Colors.deepOrangeAccent,
@@ -51,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //Text(name.toString()),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[            
+          children: <Widget>[
             RaisedButton(
               onPressed: () {
                 showDialog(
@@ -132,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.greenAccent,
             ),
             RaisedButton(
-              onPressed: (){
+              onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -164,7 +188,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text("delete"),
               color: Colors.greenAccent,
-
             )
           ],
         )
